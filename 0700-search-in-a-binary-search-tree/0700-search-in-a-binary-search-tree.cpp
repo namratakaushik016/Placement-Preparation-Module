@@ -13,13 +13,15 @@ class Solution {
 public:
     TreeNode* searchBST(TreeNode* root, int val) {
         if (!root)
-        return nullptr;
+        return nullptr;//agr root == null ha to nullptr return krdo
 
-    std::queue<TreeNode*> nodeQueue;
-    nodeQueue.push(root);
+    std::queue<TreeNode*> nodeQueue;//ek queue bnayi nodeQueue naam ki
+    nodeQueue.push(root);//push kra dia usme root node
 
-    while (!nodeQueue.empty()) {
-        TreeNode* current = nodeQueue.front();
+    while (!nodeQueue.empty()) {//the while loop will continue running as long as the nodeQueue is not empty
+       
+        TreeNode* current = nodeQueue.front();// the current variable represents the node currently being processed during the level-order traversal of the binary search tree (BST)
+        
         nodeQueue.pop();
 
         if (current->val == val)
