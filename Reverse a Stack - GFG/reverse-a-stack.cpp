@@ -8,27 +8,31 @@ using namespace std;
 // } Driver Code Ends
 //User function Template for C++
 
-   class Solution {
+class Solution{
 public:
-    void insertAtBottom(stack<int> &St,int x){
-        if(St.empty()){
-            St.push(x);
-            return;
-        }
-        int top = St.top();
-        St.pop();
-        insertAtBottom(St,x);
-        St.push(top);
+
+    void insertAtBottom(stack<int> &St, int item) {
+    if (St.empty()) {
+        St.push(item);
+        return;
     }
+
+    int temp = St.top();
+    St.pop();
+    insertAtBottom(St, item);
+    St.push(temp);
+}
     void Reverse(stack<int> &St){
-        if(St.empty()){
-            return;
-        }
-        int top = St.top();
-        St.pop();
-        Reverse(St);
-        insertAtBottom(St,top);
+        if (St.empty()) {
+        return;
     }
+
+    int item = St.top();
+    St.pop();
+    Reverse(St);
+    insertAtBottom(St, item);
+}
+
 };
 
 //{ Driver Code Starts.
