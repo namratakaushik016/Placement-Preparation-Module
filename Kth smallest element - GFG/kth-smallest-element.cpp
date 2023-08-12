@@ -13,26 +13,26 @@ class Solution{
     // l : starting index of the array i.e 0
     // r : ending index of the array i.e size-1
     // k : find kth smallest element and return using this function
-    
-    int kthSmallest(int arr[], int l, int r, int k) {
-        //code here
-        //step1
-        priority_queue<int>pq;
-        for(int i=0;i<k;i++){
-            pq.push(arr[i]);
-        }
-        //step2
-        for(int i=k;i<=r;i++){
-            if(arr[i]<pq.top()){
-                pq.pop();
-                pq.push(arr[i]);
+    int binarySearch(int arr[], int start, int end, int element) {
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (arr[mid] == element) {
+                return mid;
+            } else if (arr[mid] < element) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
             }
         }
-        //ans=pq.top();
-        int ans=pq.top();
-        return ans;
+        return -1; // Return -1 if the element is not found
     }
-        
+
+    int kthSmallest(int arr[], int l, int r, int k) {
+        sort(arr, arr + r + 1); // Sort the array before applying binary search
+        int index = binarySearch(arr, l, r, arr[k-1]);
+        return arr[index];
+    }
+    
 };
 
 //{ Driver Code Starts.
