@@ -9,18 +9,26 @@ public:
     vector<int> singleNumber(vector<int> nums) 
     {
         // Code here.
-        int n=nums.size();
-        vector<int>ans;
-       unordered_map<int,int>mp;
-       for(int i=0;i<n;i++){
-           mp[nums[i]]++;
-       }
-       for(auto i:mp){
-          if(i.second==1)
-            ans.push_back(i.first);
-          }
-    sort(ans.begin(),ans.end());
-     return ans;
+        int value = 0;
+        for(auto i : nums)
+            value ^= i;
+        
+        int rightmost = (value & (value - 1)) ^ value;
+        
+        vector<int> ans(2, 0);
+        
+        for(auto i : nums){
+            if(i & rightmost)
+                ans[0] ^= i;
+            else
+                ans[1] ^= i;
+        }
+        
+        if(ans[0] > ans[1])
+            swap(ans[0], ans[1]);
+            
+        return ans;
+    
     }
 };
 
